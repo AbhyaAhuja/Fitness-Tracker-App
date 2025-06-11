@@ -1,4 +1,4 @@
-#🏋️‍♀️ Fitness Tracker App
+# 🏋️‍♀️ Fitness Tracker App
 
 A simple and elegant Flutter application to track your daily workouts, view statistics, and maintain a healthy lifestyle.
 
@@ -81,19 +81,24 @@ lib/
 
 ![Home Page](assets/homePage.png)
 
+
 ### ➕ Add Workout
 
 ![Add new log](assets/addLogs.png)
+
 
 ### 📊 Report Page
 
 ![Report Page](assets/report.png)
 
+
 ### 📐 BMI Calculator
 
 ![BMI Calculator 1](assets/bmi1.png)
 
-![BMI Calculator 2](assets/bmi2.png)
+
+![BMI Calculator 2](assets/bm2.png)
+
 
 
 #### 👨‍💻 Author
