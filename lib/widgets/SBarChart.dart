@@ -2,6 +2,7 @@ import 'package:fitness_tracker_app/model/Workout.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+ // Calculate total number of workouts per category
 class Sbarchart extends StatelessWidget {
   final List<Workout> allLogs;
   Sbarchart({required this.allLogs});
@@ -32,8 +33,8 @@ class Sbarchart extends StatelessWidget {
           x: i,
           barRods: [
             BarChartRodData(
-              toY: total.toDouble(),
-              color: Workout.getColor(category),
+              toY: total.toDouble(),// height based on total
+              color: Workout.getColor(category),// color based on category
               width: 20,
             ),
           ],

@@ -9,12 +9,16 @@ class Bmipage extends StatefulWidget {
 }
 
 class _BmipageState extends State<Bmipage> {
-  TextEditingController weightController = TextEditingController();
-  TextEditingController heightController = TextEditingController();
+  TextEditingController weightController =
+      TextEditingController(); // Input for weight
+  TextEditingController heightController =
+      TextEditingController(); // Input for height
   double weight = 0;
   double height = 0;
   double bmi = 0;
-  bool isCal = false;
+  bool isCal = false; // Whether BMI has been calculated
+
+  // Calculate BMI and validate input
   updatebmi() {
     if (weightController.text.isEmpty || heightController.text.isEmpty) {
       showAdaptiveDialog(
@@ -34,6 +38,8 @@ class _BmipageState extends State<Bmipage> {
       );
       return;
     }
+
+    // Show alert if non-numeric input
     if (double.tryParse(heightController.text) == null ||
         double.tryParse(weightController.text) == null) {
       showAdaptiveDialog(
@@ -53,6 +59,8 @@ class _BmipageState extends State<Bmipage> {
       );
       return;
     }
+
+    // Perform BMI calculation
     setState(() {
       double heightM = double.parse(heightController.text) / 100;
       double weight = double.parse(weightController.text);
@@ -61,6 +69,7 @@ class _BmipageState extends State<Bmipage> {
     });
   }
 
+  // Determine BMI category
   String getBMICategory(double bmi) {
     if (bmi < 18.5) return "Underweight";
     if (bmi >= 18.5 && bmi <= 24.9) return "Normal";
@@ -68,6 +77,7 @@ class _BmipageState extends State<Bmipage> {
     return "Obese";
   }
 
+  // Return chart sections based on BMI category
   List<PieChartSectionData> getSections() {
     return [
       PieChartSectionData(
@@ -115,6 +125,8 @@ class _BmipageState extends State<Bmipage> {
           ),
         ),
       ),
+
+      // Bottom navigation with Home and Report buttons
       bottomNavigationBar: Container(
         height: 50,
         decoration: BoxDecoration(color: Colors.black),
@@ -140,6 +152,8 @@ class _BmipageState extends State<Bmipage> {
           ],
         ),
       ),
+
+      // Main content
       body: Column(
         children: [
           Card(
@@ -159,6 +173,7 @@ class _BmipageState extends State<Bmipage> {
                     ),
                   ),
 
+                  // Height input
                   TextField(
                     style: GoogleFonts.poppins(color: Colors.white),
                     controller: heightController,
@@ -168,6 +183,8 @@ class _BmipageState extends State<Bmipage> {
                     ),
                   ),
                   SizedBox(height: 20),
+
+                  // Calculate button
                   ElevatedButton(
                     onPressed: updatebmi,
                     child: Text(
@@ -186,6 +203,7 @@ class _BmipageState extends State<Bmipage> {
 
           SizedBox(height: 40),
 
+          // Show BMI result and pie chart if calculated
           if (isCal)
             Card(
               elevation: 8,

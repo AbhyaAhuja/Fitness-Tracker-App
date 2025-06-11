@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fitness_tracker_app/model/Workout.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// Addlogs is a form screen that lets users add a new Workout entry
 class Addlogs extends StatefulWidget {
-  final void Function(Workout) onAddWorkout;
+  final void Function(Workout)
+  onAddWorkout; // Callback to pass workout to parent
 
   Addlogs({required this.onAddWorkout});
   @override
@@ -13,11 +15,13 @@ class Addlogs extends StatefulWidget {
 }
 
 class AddlogsState extends State<Addlogs> {
+  // Controllers to capture input
   TextEditingController titleController = TextEditingController();
   TextEditingController durationController = TextEditingController();
-  Category defaultSelect = Category.Yoga;
-  DateTime selectedDate = DateTime.now();
+  Category defaultSelect = Category.Yoga; // Default category
+  DateTime selectedDate = DateTime.now(); // Default date
 
+  // Show validation error popup
   showDialog(BuildContext context, String message) {
     showAdaptiveDialog(
       context: context,
@@ -39,8 +43,11 @@ class AddlogsState extends State<Addlogs> {
     );
   }
 
+  // Save the workout
   save() {
     String duration = durationController.text.trim();
+
+    // Basic validation
     if (titleController.text.isEmpty || duration.isEmpty) {
       showDialog(context, "Empty fields");
       return;
@@ -50,6 +57,7 @@ class AddlogsState extends State<Addlogs> {
       return;
     }
 
+    // Create workout object
     Workout workout = Workout(
       title: titleController.text,
       category: defaultSelect,
@@ -57,14 +65,17 @@ class AddlogsState extends State<Addlogs> {
       duration: int.parse(duration),
     );
 
+    // Trigger callback and close modal
     widget.onAddWorkout(workout);
     Navigator.pop(context);
   }
 
+  // Cancel button logic
   cancel() {
     Navigator.pop(context);
   }
 
+  // Open date picker and update selected date
   datepicker() async {
     DateTime firstDate = DateTime(2025, 1, 1);
     DateTime lastDate = DateTime(2025, 12, 31);
@@ -74,7 +85,7 @@ class AddlogsState extends State<Addlogs> {
       firstDate: firstDate,
       lastDate: lastDate,
     );
-
+    // If user selects a date, update the state
     setState(() {
       selectedDate = dateSelected!;
     });
@@ -91,7 +102,7 @@ class AddlogsState extends State<Addlogs> {
             controller: titleController,
             decoration: InputDecoration(labelText: 'Title'),
           ),
-
+          // Duration input and date picker
           Row(
             children: [
               Expanded(
@@ -104,11 +115,11 @@ class AddlogsState extends State<Addlogs> {
                 ),
               ),
               SizedBox(width: 30),
-
+              // Display selected date and icon to open picker
               Row(
                 children: [
                   Text(
-                    formatter.format(selectedDate),
+                    formatter.format(selectedDate), // Format date
                     style: GoogleFonts.poppins(),
                   ),
                   IconButton(
@@ -120,6 +131,8 @@ class AddlogsState extends State<Addlogs> {
             ],
           ),
           SizedBox(height: 20),
+
+          // Category dropdown and Save/Cancel buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -139,6 +152,8 @@ class AddlogsState extends State<Addlogs> {
                 },
               ),
               SizedBox(width: 20),
+
+              // Save button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 202, 255, 204),
@@ -149,6 +164,8 @@ class AddlogsState extends State<Addlogs> {
                   style: GoogleFonts.poppins(color: Colors.black),
                 ),
               ),
+
+              // Cancel button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 249, 191, 186),

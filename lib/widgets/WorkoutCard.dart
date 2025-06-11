@@ -1,14 +1,20 @@
 import 'package:fitness_tracker_app/model/Workout.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class Workoutcard extends StatelessWidget {
   final List<Workout> allLogs;
   final index;
   final void Function(Workout) onRemoveWorkout;
-  Workoutcard({required this.index, required this.allLogs, required this.onRemoveWorkout});
+  Workoutcard({
+    required this.index,
+    required this.allLogs,
+    required this.onRemoveWorkout,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Made cards dismissible
     return Dismissible(
       key: ValueKey(allLogs[index]),
       background: Container(
@@ -18,31 +24,35 @@ class Workoutcard extends StatelessWidget {
         ),
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
-      onDismissed: (direction)=>onRemoveWorkout(allLogs[index]),
+      onDismissed: (direction) => onRemoveWorkout(allLogs[index]),
       child: Card(
-        // elevation: 10,
-        color:Color.fromARGB(255, 216, 216, 216),
+        color: Color.fromARGB(255, 216, 216, 216),
         child: Row(
           children: [
+            // Icon Container
             Container(
               height: 50,
               width: 50,
               margin: EdgeInsets.all(10),
 
               decoration: BoxDecoration(
-                color:Workout.getColor(allLogs[index].category),
+                color: Workout.getColor(allLogs[index].category),
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
-              child: Icon(allLogs[index].getCategoryIcon(), color: Colors.white),
+              child: Icon(
+                allLogs[index].getCategoryIcon(),
+                color: Colors.white,
+              ),
             ),
 
+            // Workout Info Column
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
-                  // mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    // title
                     Text(
                       allLogs[index].title,
                       style: GoogleFonts.poppins(
@@ -52,6 +62,7 @@ class Workoutcard extends StatelessWidget {
                     ),
                   ],
                 ),
+                // Info Chips Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -60,7 +71,7 @@ class Workoutcard extends StatelessWidget {
                       width: 70,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color:Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 0, 0, 0),
 
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
@@ -68,7 +79,7 @@ class Workoutcard extends StatelessWidget {
                         allLogs[index].duration.toString() + " mins",
                         style: GoogleFonts.poppins(
                           fontSize: 11,
-                          color: Colors.white
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -78,7 +89,7 @@ class Workoutcard extends StatelessWidget {
                       width: 80,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color:Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 0, 0, 0),
 
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),
@@ -97,7 +108,7 @@ class Workoutcard extends StatelessWidget {
                       width: 90,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color:Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 0, 0, 0),
 
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),

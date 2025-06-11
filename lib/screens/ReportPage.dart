@@ -6,8 +6,9 @@ import 'package:fitness_tracker_app/widgets/SBarChart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// Report page to visualize workout statistics
 class Reportpage extends StatelessWidget {
-  final List<Workout> allLogs;
+  final List<Workout> allLogs; // List of all workout logs
   Reportpage({required this.allLogs});
 
   @override
@@ -17,7 +18,7 @@ class Reportpage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 43, 43, 43),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context); // Navigate back
           },
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),
@@ -30,6 +31,8 @@ class Reportpage extends StatelessWidget {
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 43, 43, 43),
+
+      // Bottom navigation bar with Home and BMI icons
       bottomNavigationBar: Container(
         height: 50,
         decoration: BoxDecoration(color: Colors.black),
@@ -59,10 +62,12 @@ class Reportpage extends StatelessWidget {
         ),
       ),
 
+      // Report content
       body: Padding(
         padding: const EdgeInsets.all(28.0),
         child: Column(
           children: [
+            // Card showing category-wise workout totals
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -75,12 +80,16 @@ class Reportpage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+
+                    // Custom bar chart widget for categories
                     Sbarchart(allLogs: allLogs),
                   ],
                 ),
               ),
             ),
             SizedBox(height: 80),
+
+             // Card showing daily workout summary
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

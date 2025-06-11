@@ -1,5 +1,6 @@
+// Home screen
+// import relevant files, dependencies
 import 'dart:convert';
-
 import 'package:fitness_tracker_app/model/Workout.dart';
 import 'package:fitness_tracker_app/screens/BMIPage.dart';
 import 'package:fitness_tracker_app/screens/ReportPage.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// Stateful widget as dynamic list of logs
 class Homepage extends StatefulWidget {
   @override
   State<Homepage> createState() {
@@ -17,7 +19,10 @@ class Homepage extends StatefulWidget {
 }
 
 class HomepageState extends State<Homepage> {
-  String allWorkoutKey = 'allworkoutkey';
+  String allWorkoutKey =
+      'allworkoutkey'; // Key for storing workouts in SharedPreferences
+
+  // Sample default workouts (used before any saved data is loaded)
   List<Workout> logs = [
     Workout(
       title: "Jumping jacks",
@@ -27,7 +32,7 @@ class HomepageState extends State<Homepage> {
     ),
     Workout(
       title: "Weight lifting",
-      category: Category.Strength, 
+      category: Category.Strength,
       duration: 12,
       date: DateTime.now(),
     ),
@@ -48,25 +53,26 @@ class HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    loadWorkout();
+    loadWorkout(); // Load workouts from SharedPreferences when app starts
   }
 
+  // Load function
   void loadWorkout() async {
     final pref = await SharedPreferences.getInstance();
+
     List<String>? getData = pref.getStringList(allWorkoutKey);
     if (getData != null) {
-      try {
-        setState(() {
-          logs = getData
-              .map((workoutJson) => Workout.fromJson(workoutJson))
-              .toList();
-        });
-      } catch (e) {
-        print("Error loading workout data: $e");
-      }
+      setState(() {
+        logs = getData
+            .map(
+              (workoutJson) => Workout.fromJson(workoutJson),
+            ) // Parse JSON strings to Workout objects
+            .toList();
+      });
     }
   }
 
+  // Save current list of workouts to SharedPreferences
   void saveWorkout() async {
     final pref = await SharedPreferences.getInstance();
     List<String> workoutList = logs
@@ -75,6 +81,7 @@ class HomepageState extends State<Homepage> {
     await pref.setStringList(allWorkoutKey, workoutList);
   }
 
+  // Open bottom sheet to add a new workout
   add() {
     showModalBottomSheet(
       context: context,
@@ -82,10 +89,10 @@ class HomepageState extends State<Homepage> {
     );
   }
 
+  // Add new workout to the list and save it
   addWorkout(Workout workout) {
     setState(() {
       logs.add(workout);
-      // titleController.clear();
     });
     saveWorkout();
 
@@ -98,6 +105,7 @@ class HomepageState extends State<Homepage> {
     );
   }
 
+  // Remove a workout and allow undo via Snackbar
   removeWorkout(Workout workout) {
     setState(() {
       logs.remove(workout);
@@ -132,6 +140,8 @@ class HomepageState extends State<Homepage> {
         child: Icon(Icons.add, color: Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      // Bottom nav bar with Report and BMI buttons
       bottomNavigationBar: Container(
         height: 50,
         decoration: BoxDecoration(color: Colors.black),
@@ -163,6 +173,7 @@ class HomepageState extends State<Homepage> {
         ),
       ),
 
+      // Main UI
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
         child: Column(
@@ -221,6 +232,8 @@ class HomepageState extends State<Homepage> {
                 ),
               ),
             ),
+
+            // Workout list
             Container(
               height: MediaQuery.of(context).size.height - 256,
 
