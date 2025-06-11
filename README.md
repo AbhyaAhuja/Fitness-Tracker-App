@@ -59,6 +59,10 @@ git clone https://github.com/AbhyaAhuja/fitness_tracker_app.git
 
 
 ## 📁 Folder Structure
+
+
+<pre> ```text 
+>>>>>>> ecbb48a (updated README again)
 lib/
 ├── main.dart                 # Entry point of the app
 ├── model/
@@ -72,6 +76,9 @@ lib/
 │   ├── DailyBarChart.dart    # Daily chart visualization
 │   └── SBarChart.dart        # Summary chart visualization
 │   └── AddLogs.dart          # Add new logs
+``` </pre>
+
+
 
 
 ## Screenshots:
@@ -97,7 +104,10 @@ lib/
 ![BMI Calculator 1](assets/bmi1.png)
 
 
-![BMI Calculator 2](assets/bm2.png)
+
+
+![BMI Calculator 2](assets/bm.png)
+
 
 
 
