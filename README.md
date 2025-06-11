@@ -48,7 +48,7 @@ Google Fonts for clean typography
 
 1. Clone the repo:
 ```bash
-git clone https://github.com/AbhyaAhuja/fitness_tracker_app.git
+git clone https://github.com/AbhyaAhuja/Fitness-Tracker-App.git
 ```
 2. Navigate to the project directory and get dependencies:
    ```bash
@@ -61,8 +61,7 @@ git clone https://github.com/AbhyaAhuja/fitness_tracker_app.git
 ## 📁 Folder Structure
 
 
-<pre> ```text 
->>>>>>> ecbb48a (updated README again)
+<pre> ```
 lib/
 ├── main.dart                 # Entry point of the app
 ├── model/
